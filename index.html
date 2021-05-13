@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+      const instance = axios.create({
+        baseURL: "http://localhost:3000",
+      });
+
+      const getAllProducts = async () => {
+        try {
+          const { data } = await instance.get("/products");
+          console.log(data);
+          return data;
+        } catch (error) {
+          throw error;
+        }
+      };
+
+      const addProduct = async (newProduct) => {
+        try {
+          const { data } = await instance.post("/products", newProduct);
+          console.log(data);
+          return data;
+        } catch (error) {
+          throw error;
+        }
+      };
+
+      const deleteProduct = async (id) => {
+        try {
+          const { data } = await instance.delete(`/products/${id}`);
+          console.log(data);
+          return data;
+        } catch (error) {
+          throw error;
+        }
+      };
+
+      const newProduct = {
+        title: "Yellow eggs",
+        type: "dairy",
+        description: "Raw organic brown eggs in a basket",
+        filename: "0.jpg",
+        height: 600,
+        width: 400,
+        price: 28.1,
+        rating: 4,
+      };
+      deleteProduct(1);
+      //   addProduct(newProduct);
+      //   getAllProducts();
+    </script>
+  </body>
+</html>
